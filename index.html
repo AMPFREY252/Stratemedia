@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strate Digital Solutions - Your Digital Transformation Partner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Strate Digital Solutions" class="logo-image">
+                </div>
+                <span class="logo-text">Strate Digital Solutions</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="strate.html">StrateTV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Strate Digital Solutions</h1>
+                <h3>Your Digital Transformation Partner</h3>
+                <p>Founded by Ampfrey Tukwasibwe - IT Student & Tech Entrepreneur</p>
+                <div class="hero-buttons">
+                    <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-container">
+                    <img src="me.jpg" alt="Ampfrey Tukwasibwe - Founder of Strate Digital Solutions" class="profile-image">
+                    <div class="profile-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-info">
+            <div class="container">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education</h3>
+                        <p>BSc IT - MUST</p>
+                        <a href="about.html" class="btn-link">Learn More →</a>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Skills</h3>
+                        <p>Web, Mobile, Design & Streaming</p>
+                        <a href="skills.html" class="btn-link">View Skills →</a>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>StrateTV</h3>
+                        <p>Founder & CEO</p>
+                        <a href="strate.html" class="btn-link">Explore →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Ampfrey Tukwasibwe. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://wa.me/256773252005" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://tiktok.com/@strate_media.com" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://facebook.com/Tukwasibwe-Ampfrey" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/tukwasibwe-ampfrey" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/ampfrey" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsKb9fP5e7iRktQzgnwdXcY5OtTyyk6t0",
+            authDomain: "mywebsite-eb628.firebaseapp.com",
+            databaseURL: "https://mywebsite-eb628-default-rtdb.firebaseio.com",
+            projectId: "mywebsite-eb628",
+            storageBucket: "mywebsite-eb628.firebasestorage.app",
+            messagingSenderId: "389693477462",
+            appId: "1:389693477462:web:c19746a41b3770611ee1f7",
+            measurementId: "G-3KQQTT62TW"
+        };
+
+        // Initialize Firebase with error handling
+        try {
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const analytics = getAnalytics(app);
+
+            // Make available globally
+            window.initializeApp = initializeApp;
+            window.getDatabase = getDatabase;
+            window.getAnalytics = getAnalytics;
+            window.database = database;
+            window.analytics = analytics;
+            window.firebase = { apps: [app] };
+            
+            console.log('Firebase initialized successfully');
+        } catch (error) {
+            console.error('Firebase initialization error:', error);
+            // Show error panel if function exists
+            if (typeof showFirebaseError === 'function') {
+                showFirebaseError('initialization', error);
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

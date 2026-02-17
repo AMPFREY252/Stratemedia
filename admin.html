@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Ampfrey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Strate Digital Solutions" class="logo-image">
+                </div>
+                <span class="logo-text">Strate Digital Solutions</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="strate.html">StrateTV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html" class="admin-btn active">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Admin Panel</h1>
+                <p>Manage your portfolio and contact messages</p>
+            </div>
+        </section>
+
+        <section class="admin-section">
+            <div class="container">
+                <!-- Login Form -->
+                <div id="loginForm" class="admin-login">
+                    <div class="login-card">
+                        <h2><i class="fas fa-lock"></i> Admin Login</h2>
+                        <p>Access your admin dashboard to manage contact messages</p>
+                        <form id="adminLoginForm">
+                            <div class="form-group">
+                                <label for="adminUsername">Username</label>
+                                <input type="text" id="adminUsername" placeholder="Enter username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminPassword">Password</label>
+                                <input type="password" id="adminPassword" placeholder="Enter password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login
+                            </button>
+                        </form>
+                        <div class="login-hint">
+                            <small>Hint: Username is Ampfrey, password is Strate.15</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Panel -->
+                <div id="adminPanel" class="admin-panel" style="display: none;">
+                    <div class="admin-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+                        <div class="admin-actions">
+                            <button id="refreshBtn" class="btn btn-secondary">
+                                <i class="fas fa-sync-alt"></i>
+                                Refresh
+                            </button>
+                            <button id="logoutBtn" class="btn btn-danger">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalMessages">0</h3>
+                                <p>Total Messages</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="todayMessages">0</h3>
+                                <p>Today's Messages</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="recentMessages">0</h3>
+                                <p>Recent (7 days)</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="unreadMessages">0</h3>
+                                <p>Unread</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages List -->
+                    <div class="messages-section">
+                        <div class="messages-header">
+                            <h3><i class="fas fa-inbox"></i> Messages</h3>
+                            <div class="messages-controls">
+                                <select id="filterSelect">
+                                    <option value="all">All Messages</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                </select>
+                                <input type="text" id="searchInput" placeholder="Search messages...">
+                            </div>
+                        </div>
+                        <div id="messagesList" class="messages-list">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                Loading messages...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Ampfrey Tukwasibwe. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://wa.me/256773252005" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://tiktok.com/@strate_media.com" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://facebook.com/Tukwasibwe-Ampfrey" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/tukwasibwe-ampfrey" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/ampfrey" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsKb9fP5e7iRktQzgnwdXcY5OtTyyk6t0",
+            authDomain: "mywebsite-eb628.firebaseapp.com",
+            databaseURL: "https://mywebsite-eb628-default-rtdb.firebaseio.com",
+            projectId: "mywebsite-eb628",
+            storageBucket: "mywebsite-eb628.firebasestorage.app",
+            messagingSenderId: "389693477462",
+            appId: "1:389693477462:web:c19746a41b3770611ee1f7",
+            measurementId: "G-3KQQTT62TW"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const analytics = getAnalytics(app);
+
+            window.database = database;
+            window.analytics = analytics;
+            window.firebase = { apps: [app] };
+            
+        } catch (error) {
+            console.error('Firebase initialization error:', error);
+        }
+    </script>
+    
+    <!-- Main Script -->
+    <script src="admin-script.js"></script>
+</body>
+</html>

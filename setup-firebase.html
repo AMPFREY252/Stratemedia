@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Database Setup - Ampfrey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover { background: #0056b3; }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase Database Setup</h1>
+        <p>Click the buttons below to create the required collections for your website.</p>
+        
+        <div id="status" class="status info">
+            Ready to setup Firebase collections...
+        </div>
+        
+        <button class="btn" onclick="setupContacts()">📬 Create Contacts Collection</button>
+        <button class="btn" onclick="setupReplies()">📤 Create Replies Collection</button>
+        <button class="btn" onclick="setupAnalytics()">📈 Create Analytics Collection</button>
+        <button class="btn" onclick="setupSettings()">⚙️ Create Settings Collection</button>
+        <button class="btn" onclick="setupPublic()">🌐 Create Public Collection</button>
+        <button class="btn" onclick="setupAll()">🚀 Setup All Collections</button>
+        
+        <h3>Current Status:</h3>
+        <div id="currentStatus">Checking Firebase connection...</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsKb9fP5e7iRktQzgnwdXcY5OtTyyk6t0",
+            authDomain: "mywebsite-eb628.firebaseapp.com",
+            databaseURL: "https://mywebsite-eb628-default-rtdb.firebaseio.com",
+            projectId: "mywebsite-eb628",
+            storageBucket: "mywebsite-eb628.firebasestorage.app",
+            messagingSenderId: "389693477462",
+            appId: "1:389693477462:web:c19746a41b3770611ee1f7",
+            measurementId: "G-3KQQTT62TW"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+        }
+
+        function updateCurrentStatus() {
+            const statusDiv = document.getElementById('currentStatus');
+            database.ref('.info/connected').on('value', (snapshot) => {
+                statusDiv.innerHTML = snapshot.val() ? 
+                    '✅ Firebase Connected' : 
+                    '❌ Firebase Disconnected';
+            });
+        }
+
+        async function setupContacts() {
+            try {
+                await database.ref('contacts').push({
+                    name: "Sample Contact",
+                    email: "sample@example.com",
+                    subject: "Test Message",
+                    message: "This is a sample contact message",
+                    timestamp: new Date().toISOString(),
+                    read: false,
+                    replied: false,
+                    status: "pending"
+                });
+                updateStatus('✅ Contacts collection created with sample data!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error creating contacts: ${error.message}`, 'error');
+            }
+        }
+
+        async function setupReplies() {
+            try {
+                await database.ref('replies').push({
+                    to: "sample@example.com",
+                    subject: "Re: Test Message",
+                    message: "This is a sample reply",
+                    timestamp: new Date().toISOString(),
+                    contactId: "sample-contact-id"
+                });
+                updateStatus('✅ Replies collection created with sample data!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error creating replies: ${error.message}`, 'error');
+            }
+        }
+
+        async function setupAnalytics() {
+            try {
+                await database.ref('analytics').push({
+                    date: new Date().toISOString().split('T')[0],
+                    visits: 0,
+                    messages: 0,
+                    timestamp: new Date().toISOString()
+                });
+                updateStatus('✅ Analytics collection created with sample data!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error creating analytics: ${error.message}`, 'error');
+            }
+        }
+
+        async function setupSettings() {
+            try {
+                await database.ref('settings').set({
+                    siteTitle: "Ampfrey Tukwasibwe",
+                    siteDescription: "Software Developer & Portfolio",
+                    contactEmail: "ampfrey@example.com",
+                    updatedAt: new Date().toISOString()
+                });
+                updateStatus('✅ Settings collection created!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error creating settings: ${error.message}`, 'error');
+            }
+        }
+
+        async function setupPublic() {
+            try {
+                await database.ref('public').set({
+                    about: {
+                        name: "Ampfrey Tukwasibwe",
+                        bio: "Software Developer specializing in mobile and web applications"
+                    },
+                    skills: {
+                        mobile: ["Android Studio", "Flutter"],
+                        web: ["JavaScript", "React", "Firebase"]
+                    }
+                });
+                updateStatus('✅ Public collection created!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error creating public: ${error.message}`, 'error');
+            }
+        }
+
+        async function setupAll() {
+            updateStatus('🚀 Setting up all collections...', 'info');
+            try {
+                await setupContacts();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await setupReplies();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await setupAnalytics();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await setupSettings();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await setupPublic();
+                updateStatus('🎉 All collections created successfully! Your website is ready!', 'success');
+            } catch (error) {
+                updateStatus(`❌ Error in setup: ${error.message}`, 'error');
+            }
+        }
+
+        // Initialize
+        updateCurrentStatus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "rules": {
+    "contacts": {
+      ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".write": true,
+      ".indexOn": ["timestamp"],
+      "$contactId": {
+        ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+        ".write": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+        ".validate": [
+          "newData.hasOwnProperty('name')",
+          "newData.hasOwnProperty('email')",
+          "newData.hasOwnProperty('subject')",
+          "newData.hasOwnProperty('message')",
+          "newData.hasOwnProperty('timestamp')",
+          "newData.name.isString() && newData.name.length > 0",
+          "newData.email.isString() && newData.email.length > 0",
+          "newData.subject.isString() && newData.subject.length > 0",
+          "newData.message.isString() && newData.message.length > 0",
+          "newData.timestamp.isString()"
+        ]
+      }
+    },
+    "replies": {
+      ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".write": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".indexOn": ["timestamp"],
+      "$replyId": {
+        ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+        ".write": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+        ".validate": [
+          "newData.hasOwnProperty('to')",
+          "newData.hasOwnProperty('subject')",
+          "newData.hasOwnProperty('message')",
+          "newData.hasOwnProperty('timestamp')",
+          "newData.to.isString() && newData.to.length > 0",
+          "newData.subject.isString() && newData.subject.length > 0",
+          "newData.message.isString() && newData.message.length > 0",
+          "newData.timestamp.isString()"
+        ]
+      }
+    },
+    "analytics": {
+      ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".write": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".indexOn": ["timestamp"]
+    },
+    "users": {
+      ".read": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".write": false,
+      ".indexOn": ["email", "createdAt"]
+    },
+    "settings": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === 'ampfrey' || (auth.token.admin === true && auth.token.email === 'ampfrey@mywebsite-eb628.firebaseapp.com')",
+      ".validate": [
+        "newData.hasOwnProperty('siteTitle')",
+        "newData.hasOwnProperty('siteDescription')",
+        "newData.hasOwnProperty('contactEmail')",
+        "newData.hasOwnProperty('updatedAt')",
+        "newData.updatedAt.isString()"
+      ]
+    },
+    "public": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": ["name"]
+    }
+  }
+}
