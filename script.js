@@ -256,17 +256,19 @@ function getFromLocalStorage(key) {
 }
 
 // Enhanced contact form with offline support
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
-            inquiryType: document.getElementById('inquiry-type')?.value || 'general',
-            message: document.getElementById('message').value,
-            timestamp: new Date().toISOString(),
+// This will be initialized after DOM is ready in initializeDOMElements()
+function setupContactForm() {
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                inquiryType: document.getElementById('inquiry-type')?.value || 'general',
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString(),
             read: false,
             replied: false,
             status: 'pending'
@@ -328,39 +330,66 @@ function initializeDOMElements() {
     clearAllBtn = document.getElementById('clearAllBtn');
     markReadBtn = document.getElementById('markReadBtn');
     
+    console.log('DOM Elements Initialized:');
+    console.log('Hamburger:', hamburger);
+    console.log('Nav Menu:', navMenu);
     console.log('DOM Elements initialized:', {
         adminLoginForm: !!adminLoginForm,
         loginForm: !!loginForm,
         adminPanel: !!adminPanel
     });
     
+    // Setup contact form after DOM is ready
+    setupContactForm();
+    
     // Setup admin login after DOM is ready
     setupAdminLogin();
+    
+    // Setup hamburger menu functionality
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger clicked'); // Debug log
+            console.log('Nav menu before toggle:', navMenu); // Debug nav menu
+            console.log('Hamburger before toggle:', hamburger); // Debug hamburger
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            console.log('Nav menu after toggle:', navMenu.classList.contains('active')); // Debug result
+            console.log('Hamburger after toggle:', hamburger.classList.contains('active')); // Debug result
+        });
+        
+        console.log('Hamburger menu event listener attached successfully');
+        
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Close menu when clicking outside (mobile)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            }
+        });
+        
+    } else {
+        console.error('Hamburger menu elements not found:', { hamburger: !!hamburger, navMenu: !!navMenu });
+    }
 }
 
-// Mobile Navigation Toggle
-hamburger?.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
+// Mobile Navigation Toggle - will be set up in initializeDOMElements
 
-// Close menu when clicking on a link (mobile)
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
-
-// Close menu when clicking outside (mobile)
-document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    }
-});
+// Close menu when clicking on a link (mobile) - will be set up in initializeDOMElements
+// Close menu when clicking outside (mobile) - will be set up in initializeDOMElements
 
 // Smooth Scrolling for Navigation Links (only for single page if needed)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
