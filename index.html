@@ -89,57 +89,16 @@
                 <a href="https://facebook.com/Tukwasibwe-Ampfrey" target="_blank" title="Facebook">
                     <i class="fab fa-facebook"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/tukwasibwe-ampfrey" target="_blank" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/tukwasibwe-ampfrey-621b272a4" target="_blank" title="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://github.com/ampfrey" target="_blank" title="GitHub">
+                <a href="https://github.com/AMPFREY252" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
         </div>
     </footer>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-        import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAsKb9fP5e7iRktQzgnwdXcY5OtTyyk6t0",
-            authDomain: "mywebsite-eb628.firebaseapp.com",
-            databaseURL: "https://mywebsite-eb628-default-rtdb.firebaseio.com",
-            projectId: "mywebsite-eb628",
-            storageBucket: "mywebsite-eb628.firebasestorage.app",
-            messagingSenderId: "389693477462",
-            appId: "1:389693477462:web:c19746a41b3770611ee1f7",
-            measurementId: "G-3KQQTT62TW"
-        };
-
-        // Initialize Firebase with error handling
-        try {
-            const app = initializeApp(firebaseConfig);
-            const database = getDatabase(app);
-            const analytics = getAnalytics(app);
-
-            // Make available globally
-            window.initializeApp = initializeApp;
-            window.getDatabase = getDatabase;
-            window.getAnalytics = getAnalytics;
-            window.database = database;
-            window.analytics = analytics;
-            window.firebase = { apps: [app] };
-            
-            console.log('Firebase initialized successfully');
-        } catch (error) {
-            console.error('Firebase initialization error:', error);
-            // Show error panel if function exists
-            if (typeof showFirebaseError === 'function') {
-                showFirebaseError('initialization', error);
-            }
-        }
-    </script>
-    <script src="script.js"></script>
+    <script src="script-working.js"></script>
 </body>
 </html>
