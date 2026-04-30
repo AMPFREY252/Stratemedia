@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     // Sign in to Firebase with email/password
                     const { signInWithEmailAndPassword } = await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js");
-                    const userCredential = await signInWithEmailAndPassword(window.firebase.auth(), 'ampfrey@mywebsite-eb628.firebaseapp.com', 'Strate.15');
+                    const userCredential = await signInWithEmailAndPassword(window.firebase.auth(), 'ampfreytukwasibwe@gmail.com', 'Strate.15');
                     currentUser = userCredential.user;
                     
                     // Show admin panel
