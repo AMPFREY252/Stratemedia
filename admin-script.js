@@ -44,10 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (username === 'Ampfrey' && password === 'Strate.15') {
                 console.log('Login successful!');
                 
-                // Authenticate with Firebase (using custom token simulation)
+                // Authenticate with Firebase
                 try {
-                    // For demo purposes, we'll simulate authentication
-                    currentUser = { uid: 'ampfrey', email: 'admin@example.com' };
+                    // Sign in to Firebase with email/password
+                    const { signInWithEmailAndPassword } = await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js");
+                    const userCredential = await signInWithEmailAndPassword(window.firebase.auth(), 'ampfrey@mywebsite-eb628.firebaseapp.com', 'Strate.15');
+                    currentUser = userCredential.user;
                     
                     // Show admin panel
                     loginForm.style.display = 'none';
@@ -71,6 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Logout
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
+            if (window.firebase && window.firebase.auth()) {
+                window.firebase.auth().signOut();
+            }
             currentUser = null;
             adminPanel.style.display = 'none';
             loginForm.style.display = 'block';
